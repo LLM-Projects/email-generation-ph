@@ -1,0 +1,4 @@
+- https://nextjs.org/docs
+- https://ui.shadcn.com/docs
+- https://stackoverflow.com/a/37339542
+- 
