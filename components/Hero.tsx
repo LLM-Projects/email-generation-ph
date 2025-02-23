@@ -17,7 +17,7 @@ export function Hero() {
 
     setLoading(true);
 
-    const { error } = await supabase.from("subscription").upsert([{ email }]);
+    const { error } = await supabase.from("subscriptions").upsert([{ email }]);
 
     if (error) {
       console.error("Error subscribing:", error.message);
