@@ -1,20 +1,54 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { X } from "lucide-react";
 import { CldUploadWidget } from "next-cloudinary";
+import { useAppContext } from "@/context/AppContext";
 import { usePromptContext } from "@/context/PromptContext";
 import { CustomCloudinaryUploadWidgetInfo } from "@/types";
 
 export default function Generate() {
   const router = useRouter();
-  const { prompt, setPrompt, uploadedImages, setUploadedImages } = usePromptContext();
+  const [isValidating, setIsValidating] = useState(false);
+  const { openAIApiKey, setOpenAIApiKey, isKeyValid, setIsKeyValid } = useAppContext();
+  const { prompt, setPrompt, uploadedImages, setUploadedImages } =
+    usePromptContext();
   const imageFormats = ["png", "jpg", "jpeg"];
   const uploadPreset = "ml_default";
+
+  const validateOpenAIKey = useCallback(
+    async (key: string) => {
+      try {
+        setIsValidating(true);
+        const response = await fetch("https://api.openai.com/v1/models", {
+          headers: {
+            Authorization: `Bearer ${key}`,
+          },
+        });
+        const isValid = response.status === 200;
+        setIsKeyValid(isValid);
+        return isValid;
+      } catch (error) {
+        setIsKeyValid(false);
+        return false;
+      } finally {
+        setIsValidating(false);
+      }
+    },
+    [setIsKeyValid]
+  );
+
+  useEffect(() => {
+    if (openAIApiKey) {
+      validateOpenAIKey(openAIApiKey)
+    }
+  }, [openAIApiKey, validateOpenAIKey])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,9 +61,7 @@ export default function Generate() {
   };
 
   const handleDeleteImage = (index: number) => {
-    setUploadedImages((prevImages) =>
-      prevImages.filter((_, i) => i !== index)
-    );
+    setUploadedImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
   return (
@@ -42,6 +74,33 @@ export default function Generate() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Open AI API key validation */}
+            <div className="space-y-2">
+              <Input
+                type="password"
+                placeholder="Enter your OpenAI API key..."
+                value={openAIApiKey}
+                onChange={(e) => setOpenAIApiKey(e.target.value)}
+                className={`w-full ${
+                  isKeyValid
+                    ? "border-green-500"
+                    : openAIApiKey
+                    ? "border-red-500"
+                    : ""
+                }`}
+              />
+              {isValidating && (
+                <p className="text-sm text-muted-foreground">
+                  Validating API key...
+                </p>
+              )}
+              {openAIApiKey && !isValidating && (
+                <p className="text-sm text-muted-foreground">
+                  {isKeyValid ? "✓ Valid API key" : "✗ Invalid API key"}
+                </p>
+              )}
+            </div>
+
             {/* Prompt Input */}
             <Textarea
               placeholder="Enter your prompt here..."
@@ -59,7 +118,8 @@ export default function Generate() {
                   clientAllowedFormats: imageFormats, // Allow only PNG and JPG formats
                 }}
                 onSuccess={(result) => {
-                  const uploadedImageInfo = result?.info as CustomCloudinaryUploadWidgetInfo;
+                  const uploadedImageInfo =
+                    result?.info as CustomCloudinaryUploadWidgetInfo;
                   if (uploadedImageInfo) {
                     setUploadedImages((prevImages) => [
                       ...prevImages,
@@ -107,7 +167,10 @@ export default function Generate() {
             )}
 
             {/* Submit Button */}
-            <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+            <Button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+            >
               Generate
             </Button>
           </form>
