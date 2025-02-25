@@ -54,7 +54,11 @@ export default function Editor() {
       setIsLoading(true);
 
       generateTemplate(prompt, imageURLs, openAIApiKey)
-        .then(setHtml)
+        .then((html) => {
+          if (html !== null) {
+            setHtml(html);
+          }
+        })
         .finally(() => setIsLoading(false));
     }
   }, []);
@@ -92,7 +96,7 @@ export default function Editor() {
   const handleChatSubmit = () => {
     setIsLoading(true);
 
-    regenerateTemplate(html, chatInput)
+    regenerateTemplate(html, chatInput, openAIApiKey)
       .then(setHtml)
       .finally(() => setIsLoading(false));
 

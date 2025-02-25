@@ -1,20 +1,32 @@
 "use server";
 
-import { generateText } from "ai";
-import { openai } from "@ai-sdk/openai";
+import OpenAI from "openai";
 
-export async function regenerateTemplate(current_html: string, prompt: string) {
+export async function regenerateTemplate(
+  current_html: string,
+  prompt: string,
+  apiKey: string
+) {
   const errStr =
     "An error occurred while regenerating the template. Please try again.";
   try {
-    const { text } = await generateText({
-      model: openai("gpt-4o"),
-      prompt: `Regenerate the HTML email template according to the ${prompt}
-               without any additional text or explanations:\n\n
-               Current HTML: ${current_html}\n
-               Ensure not to include backticks in the generated HTML.`,
+    const openai = new OpenAI({ apiKey: apiKey });
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content:
+            "Regenerate the HTML email template according to the given prompt without any additional text or explanations.",
+        },
+        {
+          role: "user",
+          content: `Current HTML: ${current_html}\n\nPrompt: ${prompt}\nEnsure not to include backticks in the generated HTML.`,
+        },
+      ],
+      max_tokens: 1000,
     });
-    return text;
+    return response.choices[0].message.content;
   } catch (error) {
     console.error("Error regenerating template:", error);
     return errStr;
