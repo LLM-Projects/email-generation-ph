@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/tooltip";
 import { usePromptContext } from "@/context/PromptContext";
 import { regenerateTemplate } from "@/utils/regenerateTemplate";
+import { useAppContext } from "@/context/AppContext";
 
 export default function Editor() {
   const [html, setHtml] = useState("");
@@ -42,6 +43,7 @@ export default function Editor() {
     csvFile: null as File | null,
   });
   const [showApiKey, setShowApiKey] = useState(false);
+  const { openAIApiKey } = useAppContext();
 
   // Prepare the image URLs to send to the server-side template generation function
   const imageURLs = uploadedImages.map((image) => image.secure_url);
@@ -51,7 +53,7 @@ export default function Editor() {
     if (prompt) {
       setIsLoading(true);
 
-      generateTemplate(prompt, imageURLs)
+      generateTemplate(prompt, imageURLs, openAIApiKey)
         .then(setHtml)
         .finally(() => setIsLoading(false));
     }

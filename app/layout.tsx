@@ -1,7 +1,8 @@
 import "./globals.css";
+import { AppProvider } from "@/context/AppContext";
 import { PromptProvider } from "@/context/PromptContext";
 import { Inter } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <Analytics />
       <body className={`${inter.className} p-0 bg-background text-foreground`}>
-      <PromptProvider>{children}</PromptProvider>
+        <AppProvider>
+          <PromptProvider>{children}</PromptProvider>
+        </AppProvider>
       </body>
     </html>
   );
