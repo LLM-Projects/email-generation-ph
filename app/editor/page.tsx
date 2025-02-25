@@ -97,7 +97,7 @@ export default function Editor() {
     setIsLoading(true);
 
     regenerateTemplate(html, chatInput, openAIApiKey)
-      .then(setHtml)
+      .then((newHtml) => setHtml(newHtml ?? ""))
       .finally(() => setIsLoading(false));
 
     setChatInput("");
