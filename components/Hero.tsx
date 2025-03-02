@@ -33,10 +33,10 @@ export function Hero() {
     <section className="bg-gradient-to-r from-gray-900 to-black text-white py-24">
       <div className="container mx-auto text-center px-4">
         <h1 className="text-5xl font-bold mb-6 leading-tight">
-          Email Template Generator
+          Email.AI
         </h1>
         <p className="text-xl mb-10 max-w-2xl mx-auto">
-          Create stunning email templates in seconds with the power of AI
+          Create stunning email in seconds with the power of AI
         </p>
         <form
           onSubmit={handleSubmit}
