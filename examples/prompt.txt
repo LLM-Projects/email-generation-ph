@@ -1,17 +1,17 @@
-Take these sections and create a beautiful html 2 column email in the style of https://yifanrestaurant.com/:
+Take these sections and create a beautiful html 2 column email in the style of https://ABCrestaurant.com/:
 Sections and Details
 Header Section:
-Content: "YiFan Christmas Take-out and Dine-In Specials"
+Content: "ABC Christmas Take-out and Dine-In Specials"
 Image Link: Image 1
 CTA Link: View Menu
-Holiday at Yifan:
-Title: "Holiday at Yifan"
+Holiday at ABC:
+Title: "Holiday at ABC"
 Image Link: Image 2
 Holiday Take-out:
 Description: "Enjoy a chef-designed Holiday dinner from the comfort of home! Available Dec 24-Jan 1. Pre-order and get 5% off with code 'HOLIDAYS'."
 CTA Link: Pre-order Now
 Holiday Dine-in:
-Description: "Special menu for Holiday Diner at Yifan! Available Dec 24-Jan 1. Mention in-store 'HOLIDAYS' to get 5% off."
+Description: "Special menu for Holiday Diner at ABC! Available Dec 24-Jan 1. Mention in-store 'HOLIDAYS' to get 5% off."
 CTA Link: Reserve Table
 Private Event:
 Description: "Want to create unique memories? Our event center can fulfill all your needs!"
@@ -25,7 +25,7 @@ December 31: 11AM-9PM
 January 1: 11AM-9PM
 Contact Information:
 Address:
-Yifan Restaurant
+ABC Restaurant
 6000 Medlock Bridge Pkwy, STE F100
 Johns Creek, GA 30022
 Social Media Links:
