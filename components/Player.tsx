@@ -7,13 +7,13 @@ export function Player() {
         <h2 className="text-4xl font-bold mb-10">See How It Works</h2>
         <div className="relative max-w-4xl mx-auto rounded-lg shadow-2xl overflow-hidden">
           <div className="w-full" style={{ height: "500px" }}>
-            {/* <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            <iframe
+              src="https://www.youtube.com/embed/0Npqff5LJBE"
               title="Email Generator Demo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="w-full h-full"
-            ></iframe> */}
+            ></iframe>
           </div>
         </div>
       </div>

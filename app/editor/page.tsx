@@ -159,7 +159,7 @@ export default function Editor() {
                 </DialogHeader>
                 <form onSubmit={handleSendEmailSubmit} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="apiKey">API Key</Label>
+                    <Label htmlFor="apiKey">Resend API Key</Label>
                     <div className="flex space-x-2">
                       <div className="relative flex-grow">
                         <Input
@@ -197,6 +197,8 @@ export default function Editor() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="csvFile">Upload CSV (max 100 emails)</Label>
+                    <br />
+                    <Label>Just a single column with list of emails</Label>
                     <Input
                       id="csvFile"
                       name="csvFile"
