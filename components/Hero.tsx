@@ -34,7 +34,7 @@ export function Hero() {
       <div className="container mx-auto text-center px-4">
         <h1 className="text-5xl font-bold mb-6 leading-tight">Email.AI</h1>
         <p className="text-xl mb-10 max-w-2xl mx-auto">
-          Create stunning email in seconds with the power of AI
+          Craft and Send email in seconds with the power of AI
         </p>
         <form
           onSubmit={handleSubmit}

@@ -22,13 +22,12 @@ export function Features() {
           <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold">
-                Customizable
+                Wider Audience
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600">
-                Easily tailor your templates to match your brand identity and
-                style.
+                Easily send your emails to your audience just with a few clicks.
               </p>
             </CardContent>
           </Card>
@@ -40,8 +39,8 @@ export function Features() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-600">
-                Create beautiful email templates in seconds, boosting your
-                productivity.
+                No need for switching between multiple apps to create and send
+                emails.
               </p>
             </CardContent>
           </Card>
