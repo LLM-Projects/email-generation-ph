@@ -32,11 +32,9 @@ export function Hero() {
   return (
     <section className="bg-gradient-to-r from-gray-900 to-black text-white py-24">
       <div className="container mx-auto text-center px-4">
-        <h1 className="text-5xl font-bold mb-6 leading-tight">
-          Email.AI
-        </h1>
+        <h1 className="text-5xl font-bold mb-6 leading-tight">Email.AI</h1>
         <p className="text-xl mb-10 max-w-2xl mx-auto">
-          Create stunning email in seconds with the power of AI
+          Craft and Send email in seconds with the power of AI
         </p>
         <form
           onSubmit={handleSubmit}
@@ -58,6 +56,22 @@ export function Hero() {
             {loading ? "Submitting..." : "Get Started"}
           </Button>
         </form>
+
+        {/* Product Hunt banner */}
+        <div className="flex justify-center mt-10">
+          <a
+            href="https://www.producthunt.com/posts/email-ai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-email&#0045;ai"
+            target="_blank"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=932521&theme=light&t=1741115059143"
+              alt="Email&#0046;AI - AI&#0045;Powered&#0032;Email&#0032;Generator | Product Hunt"
+              style={{ width: "250px", height: "54px" }}
+              width="250"
+              height="54"
+            />
+          </a>
+        </div>
       </div>
     </section>
   );
