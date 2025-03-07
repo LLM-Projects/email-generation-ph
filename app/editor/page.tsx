@@ -39,6 +39,8 @@ export default function Editor() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [formData, setFormData] = useState({
     apiKey: "",
+    sender_name: "",
+    sender_email: "",
     subject: "",
     csvFile: null as File | null,
   });
@@ -126,6 +128,8 @@ export default function Editor() {
       },
       body: JSON.stringify({
         apiKey: formData.apiKey,
+        sender_name: formData.sender_name,
+        sender_email: formData.sender_email,
         subject: formData.subject,
         emails: extractedEmails,
         html: html,
@@ -185,6 +189,24 @@ export default function Editor() {
                         </Button>
                       </div>
                     </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="sender_name">Sender Name</Label>
+                    <Input
+                      id="sender_name"
+                      name="sender_name"
+                      value={formData.sender_name}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="sender_email">Sender Email</Label>
+                    <Input
+                      id="sender_email"
+                      name="sender_email"
+                      value={formData.sender_email}
+                      onChange={handleInputChange}
+                    />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="subject">Subject</Label>
