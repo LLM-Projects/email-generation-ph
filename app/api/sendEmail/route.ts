@@ -4,9 +4,10 @@ import { CreateBatchOptions, CreateEmailOptions, Resend } from "resend";
 
 export async function POST(req: Request) {
   try {
-    const { apiKey, subject, emails, html } = await req.json();
+    const { apiKey, sender_name, sender_email, subject, emails, html } = await req.json();
 
-    if (!apiKey || !subject || !emails || !html) {
+
+    if (!apiKey || !sender_email || !sender_email || !subject || !emails || !html) {
       return Response.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -21,7 +22,7 @@ export async function POST(req: Request) {
 
     emails.forEach((email: string) => {
       const emailOptions: CreateEmailOptions = {
-        from: "Skanda <skandavivek@chaoscontrol.net>",
+        from: `${sender_name} <${sender_email}>`,
         to: [email],
         subject: subject,
         html: html,
@@ -33,14 +34,15 @@ export async function POST(req: Request) {
     const { data, error } = await resend.batch.send(sendEmailList);
 
     if (error) {
+      console.error("Resend API error:", error);
       return Response.json({ error }, { status: 500 });
     }
 
     return Response.json({ message: "Emails sent successfully" });
   } catch (error) {
-    console.error("Error sending emails:", error);
+    console.error("Unexpected error sending emails:", error);
     return Response.json(
-      { error: "An error occurred while sending the emails." },
+      { error: `An error occurred while sending the emails. Error: ${error}` },
       { status: 500 }
     );
   }
